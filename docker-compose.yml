@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  jenkins:
+    container_name: jenkins
+    restart: always
+    image: jenkins/jenkins:lts
+    ports:
+      - 8080:8080
+    volumes:
+      - jenkins-home:/var/jenkins_home
+    depends_on:
+      - mysql
+  mysql:
+    container_name: mysql
+    restart: always
+    image: mysql:latest
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: jenkins
+      MYSQL_USER: devops
+      MYSQL_PASSWORD: devops
+    volumes:
+      - mysql-data:/var/lib/mysql
+      - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
+volumes:
+  jenkins-home:
+  mysql-data:
