@@ -1,0 +1,8 @@
+pandas
+numpy
+sklearn
+notebook
+jupyterlab
+matplotlib
+mysql-connector-python
+python-dotenv

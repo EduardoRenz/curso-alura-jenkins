@@ -25,6 +25,17 @@ services:
     volumes:
       - mysql-data:/var/lib/mysql
       - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
+  python:
+    container_name: python
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports: 
+      - "8888:8888"
+    volumes:
+    - ./project:/code
+    links:
+      - mysql
 volumes:
   jenkins-home:
   mysql-data:
